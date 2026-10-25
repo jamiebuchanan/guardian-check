@@ -1,0 +1,42 @@
+# Production-equivalent build gate.
+#
+# Copy this to .github/workflows/test.yml, or copy just the `production-build`
+# job into a workflow you already have. Then add `production-build` to your
+# branch protection's required status checks so a failing build blocks the merge.
+#
+# It assumes npm and a committed package-lock.json (`npm ci` and the npm cache
+# both need one). For pnpm or yarn, change the install and cache lines.
+#
+# It catches the errors that pass `tsc --noEmit` but fail `next build` (or your
+# framework's equivalent): TS2589 instantiation too deep, isolatedModules-only
+# errors, server/client boundary violations. That is the class of failure where
+# the local typecheck is green and the host (Vercel, Railway, anything) rejects
+# the deploy.
+
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  production-build:
+    name: Production Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"   # match your project's engines field if it sets one
+          cache: "npm"
+      - run: npm ci
+      - name: Production build
+        # Add whatever your build script reads at build time. Use test or
+        # throwaway values for public variables, and store real ones as repo
+        # secrets. Example:
+        # env:
+        #   NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+        run: npm run build

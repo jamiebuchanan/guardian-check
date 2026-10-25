@@ -1,0 +1,4 @@
+.DS_Store
+node_modules/
+# Written by the CLI on the first run, never shipped
+skills/guardian-check/working/
