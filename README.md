@@ -36,6 +36,8 @@ A step the project has no way to run (no `tsconfig.json`, no `build` script, no 
 
 ## Install
 
+To have a coding agent install it: `curl -fsSL https://raw.githubusercontent.com/jamiebuchanan/guardian-check/main/AGENT-INSTALL.md | claude`
+
 Requirements: Claude Code, Node 18 or newer, npm. The target project needs a `package.json`, and a `tsconfig.json` with TypeScript installed if you want the typecheck step.
 
 ```bash

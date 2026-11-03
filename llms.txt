@@ -1,0 +1,9 @@
+# guardian-check
+
+> A Claude Code skill that runs your typecheck, production build and unit tests, fixes build failures in a loop, and diagnoses flaky tests instead of retrying past them.
+
+## Docs
+
+- [README](https://raw.githubusercontent.com/jamiebuchanan/guardian-check/main/README.md): what it does, install, use, limits and tests
+- [AGENT-INSTALL](https://raw.githubusercontent.com/jamiebuchanan/guardian-check/main/AGENT-INSTALL.md): step by step install guide for a coding agent
+- [SKILL](https://raw.githubusercontent.com/jamiebuchanan/guardian-check/main/skills/guardian-check/SKILL.md): the skill itself, the fix loop and flake diagnosis
